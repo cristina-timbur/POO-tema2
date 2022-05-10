@@ -21,10 +21,20 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #
 #FetchContent_MakeAvailable(SomeLib)
 
+include(FetchContent)
+
+FetchContent_Declare(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG        2888d9c56eba4dedb93a84a3c57957e4a907d428 # master as of 2021-11-18
+)
+
+FetchContent_MakeAvailable(SFML)
+
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} album.cpp music.cpp artist.cpp main1.cpp path.cpp)
 
 ###############################################################################
 
@@ -70,6 +80,27 @@ endif()
 
 ###############################################################################
 
+function(sfml_set_custom_stdlib target)
+    if(APPLE)
+    elseif(UNIX)
+        if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+            target_compile_options(${target} PRIVATE "-stdlib=libc++")
+            target_link_libraries(${target} PRIVATE "-stdlib=libc++")
+        endif()
+    endif()
+endfunction()
+
+FetchContent_MakeAvailable(SFML)
+
+sfml_set_custom_stdlib(sfml-system)
+sfml_set_custom_stdlib(sfml-window)
+sfml_set_custom_stdlib(sfml-graphics)
+###############################################################################
+
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
+target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+
 # use SYSTEM so clang-tidy does not report warnings from these directories
 #target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 #target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
@@ -79,5 +110,5 @@ endif()
 
 # copy binaries to bin folder; these are uploaded as artifacts on each release
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-# install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
+
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
