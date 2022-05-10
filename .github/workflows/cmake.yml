@@ -281,10 +281,18 @@ jobs:
 #         run: |
 #           # remove --show-leak-kinds=all --track-origins=yes if there are many leaks in external libs
 #           cat date.txt | valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 ./artifacts/bin/oop
+        
+      - name: Copy missing dlls
+        if: runner.os == 'Windows' && matrix.cxx == 'cl'
+        run: |
+          cp $(where ucrtbased.dll) artifacts/bin/
+          cp $(where VCRUNTIME140_1D.dll) artifacts/bin/
+          cp $(where MSVCP140D.dll) artifacts/bin/
+          cp $(where VCRUNTIME140D.dll) artifacts/bin/
 
       - name: Move artifacts
         run: |
-          mv artifacts/bin bin
+          mv artifacts/bin/ bin/
 
       - name: Set Tag Name
         if: startsWith(github.ref, 'refs/tags/')
