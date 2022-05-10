@@ -50,6 +50,7 @@ jobs:
             cxx: g++-10
             name: Ubuntu 20.04 GCC 10
             cmake_flags: -DBUILD_SHARED_LIBS=FALSE
+            
             # This env runs valgrind
 
           - os: macos-11
@@ -88,6 +89,7 @@ jobs:
           mkdir $GITHUB_WORKSPACE/artifacts
 
       # Common Linux dependencies
+      
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
         run: |
