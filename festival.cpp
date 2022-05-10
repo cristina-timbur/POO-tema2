@@ -120,7 +120,6 @@ void festival::AddSong(int nr_artist, const std::string &name){
 }
 
 
-
 void festival::draw(){
     int first = 0, nr = 0, maxt = 0;
     std::string day, result;
@@ -176,7 +175,6 @@ void festival::draw(){
 
 	background.loadFromFile("photos/white.jpg");
 	back1.setTexture(background);
-	
 	gc1.setPosition(145.0f, 200.0f);
 	
 	gobronare.loadFromFile("photos/gobronare.png");
@@ -223,7 +221,7 @@ void festival::draw(){
             if (Event.type == sf::Event::MouseMoved){
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-//                hover pe buton
+//                hover pe buton, se schimba culoarea
                 if (first == 0){
                     if (bi1.getGlobalBounds().contains(mousePosF))
                         bi1.setColor(sf::Color(255, 244, 206));
@@ -244,7 +242,7 @@ void festival::draw(){
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
                 if (first == 0){
-//                    click pe 'concert' sau 'restaurant' sau 'book'
+//                    click pe butonul 'concert', 'restaurant' sau 'book'
                     if (bi1.getGlobalBounds().contains(mousePosF)){
                         nr = 0;
                         first = 1;
@@ -262,7 +260,7 @@ void festival::draw(){
                         nr = 7;
                     }
                 } else if (nr < 6 && first != 3){
-//                    back si next la poze
+//                    back si next la poze + afisarea pozelor
                     if (b1.getGlobalBounds().contains(mousePosF)){
                         if (nr > 0){
                             nr--;
@@ -286,6 +284,7 @@ void festival::draw(){
                         }
                     }
                 } else if (nr == 6){
+//                    reafisarea pozelor
                     if ((first == 2) && gc1.getGlobalBounds().contains(mousePosF)){
                         nr = 0;
                         first = 1;
@@ -304,7 +303,7 @@ void festival::draw(){
                         first = 3;
                         nr = 7;
                     }
-//                    bronarea
+//                    bronare bilet
                 } else if (nr == 7){
                     if (d1.getGlobalBounds().contains(mousePosF)){
                         day = "day 1";

@@ -6,7 +6,7 @@
 
 concert_artist::concert_artist(const std::string &artist, double ora, bool acces_culise) : concert(){
     if (ora > 24)
-        throw eroare_constr("");
+        throw eroare_constr("Constructor invalid. Ora invalida\n");
     else this->ora = ora;
     this->acces_culise = acces_culise;
     this->artist = artist;
@@ -15,12 +15,11 @@ concert_artist::concert_artist(const std::string &artist, double ora, bool acces
 void concert_artist::Postpone(){
 //    std::cout << "The concert will be postponed for an hour.\n";
     //se schimba si zona si ora
-
     ora += 1;
 }
 
 std::ostream &operator<< (std::ostream &os, const concert_artist &c){
-    os << "Concert: " << c.artist << ". Acces culise: " << c.acces_culise << "\n";
+    os << "Concert: " << c.artist << ". \nAcces culise: " << c.acces_culise << "\n";
     os << "Pret: " << c.pret << "\n";
     os << "Ora: " << c.ora << "\n";
     os << "Zona: " << c.zona << "\n";

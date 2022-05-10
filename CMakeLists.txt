@@ -34,7 +34,7 @@ FetchContent_MakeAvailable(SFML)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp user.cpp concert.cpp concert_artist.cpp festival.cpp)
+add_executable(${PROJECT_NAME} main.cpp user.cpp concert.cpp concert_artist.cpp festival.cpp concert_all.cpp)
 
 ###############################################################################
 
