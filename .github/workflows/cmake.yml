@@ -300,7 +300,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         # trim prefix from ref to get tag name
         run: |
-#          cat .git/refs/heads/main > .git/refs/tags/
           ls .git/refs/tags
           echo "TAG_NAME=${{github.ref_name}}" >> $GITHUB_ENV
 
