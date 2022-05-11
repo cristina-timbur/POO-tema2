@@ -11,7 +11,9 @@ jobs:
   build:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
-
+    permissions:
+      contents: write
+      
     defaults:
       run:
         # Use a bash shell, so we can use the same syntax for environment variable
@@ -300,7 +302,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         # trim prefix from ref to get tag name
         run: |
-          ls .git/refs/tags
           echo "TAG_NAME=${{github.ref_name}}" >> $GITHUB_ENV
 
       - name: Archive Release
