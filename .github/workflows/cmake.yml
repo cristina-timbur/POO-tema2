@@ -300,7 +300,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         # trim prefix from ref to get tag name
         run: |
-          echo "TAG_NAME=${GITHUB_REF#'refs/tags/'}" >> $GITHUB_ENV
+#          cat .git/refs/heads/main > .git/refs/tags/
+          ls .git/refs/tags
+          echo "TAG_NAME=${{github.ref_name}}" >> $GITHUB_ENV
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
