@@ -1,7 +1,4 @@
 #include "concert_artist.h"
-#include "eroare.h"
-#include <iostream>
-#include <string>
 #include <algorithm>
 
 class eroare : public std::invalid_argument{
