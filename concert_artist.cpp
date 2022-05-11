@@ -4,6 +4,17 @@
 #include <string>
 #include <algorithm>
 
+class eroare : public std::invalid_argument{
+public:
+    explicit eroare(const std::string &arg) : invalid_argument(arg){}
+};
+class eroare_constr : public eroare{
+public:
+    explicit eroare_constr(const std::string &arg) : eroare(arg){}
+};
+
+
+
 concert_artist::concert_artist(const std::string &artist, double ora, bool acces_culise) : concert(){
     if (ora > 24)
         throw eroare_constr("Constructor invalid. Ora invalida\n");
