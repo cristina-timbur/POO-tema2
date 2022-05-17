@@ -6,7 +6,7 @@ concert::concert(int pret, bool bratara_food, int zona) :
 {}
 
 void concert::Postpone(){
-    //se schimba si zona si ora
+    //se schimba zona
     zona -= 1;
     if (zona < 0)
         zona = 1;

@@ -28,8 +28,8 @@ std::istream &operator>>(std::istream &in, user &u) {
 	std::cout << "Please enter your age: ";
     while (true){
         in >> age;
-            if (age <= 0)
-                std::cout << "Invalid input! Your age should be greater than zero.\n";
+            if (age <= 0 or age > 105)
+                std::cout << "Invalid age! \n";
             break;
     }
     u.age = age;

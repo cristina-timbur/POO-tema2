@@ -1,20 +1,10 @@
 #include "concert_artist.h"
+#include "eroare.h"
 #include <algorithm>
-
-class eroare : public std::invalid_argument{
-public:
-    explicit eroare(const std::string &arg) : invalid_argument(arg){}
-};
-class eroare_constr : public eroare{
-public:
-    explicit eroare_constr(const std::string &arg) : eroare(arg){}
-};
-
-
 
 concert_artist::concert_artist(const std::string &artist, double ora, bool acces_culise) : concert(){
     if (ora > 24)
-        throw eroare_constr("Constructor invalid. Ora invalida\n");
+        throw eroare_ora_concert("Constructor invalid. Ora invalida\n");
     else this->ora = ora;
     this->acces_culise = acces_culise;
     this->artist = artist;
@@ -22,8 +12,11 @@ concert_artist::concert_artist(const std::string &artist, double ora, bool acces
 
 void concert_artist::Postpone(){
 //    std::cout << "The concert will be postponed for an hour.\n";
-    //se schimba si zona si ora
+    //se schimba ora
     ora += 1;
+    if (ora > 24)
+        throw eroare_ora_concert("Ora invalida (postpone)\n");
+
 }
 
 std::ostream &operator<< (std::ostream &os, const concert_artist &c){
@@ -48,7 +41,7 @@ concert_artist::concert_artist(const concert_artist& c) : concert(c) {
     zona = c.zona;
     pret = c.pret;
     bratara_food = c.bratara_food;
-    std::for_each(c.concerte.begin(), c.concerte.end(), [&](auto &chestie){ concerte.push_back(chestie->clone()); });
+    std::for_each(c.concerte.begin(), c.concerte.end(), [&](auto &concert){ concerte.push_back(concert->clone()); });
 }
 
 std::shared_ptr<concert> concert_artist::clone() const {

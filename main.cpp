@@ -14,19 +14,19 @@ void postp(int nr){
 int main(){
     user u;
 	auto f = festival::get_festival();
+    std::ifstream fin("festival.txt");
+
     try {
         concert_artist c("avicii", 18, true);
         c.setPret(175);
+        fin >> *f;
+        f->read();
+        postp(1);
+        f->restart_f(1);
     }
     catch (const std::invalid_argument &err){
         std::cout << err.what();
     }
-
-    std::ifstream fin("festival.txt");
-    fin >> *f;
-    f->read();
-    postp(1);
-    f->restart_f(1);
     f->AddSong(2, "lights out!");
     std::cin >> u;
     u.Quest();

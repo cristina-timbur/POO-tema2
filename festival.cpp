@@ -7,8 +7,8 @@
 
 festival* festival::f = nullptr;
 
-festival::festival() : nume("festival 2019"), locatie("elvetia"), oameni(789){
-}
+festival::festival() : nume("festival 2019"), locatie("elvetia"), oameni(789){}
+
 festival::~festival(){
 	for(int i = 0; i < nr_concert; ++i){
 		delete p[i];
@@ -172,7 +172,7 @@ void festival::draw(){
 	o1.setPosition(410.0f, 50.0f);
 	o1.setTexture(options);
 
-	background.loadFromFile("photos/white.jpg");
+	background.loadFromFile("photos/white.png");
 	back1.setTexture(background);
 	gc1.setPosition(145.0f, 200.0f);
 	

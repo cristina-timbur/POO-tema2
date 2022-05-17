@@ -7,13 +7,13 @@
 #include <unordered_map>
 #include "concert.h"
 #include "concert_artist.h"
-
+static const int nr_imag = 10;
 class festival {
 
 private:
 
 	static festival* f;
-    std::string imagini[10][10];
+    std::string imagini[nr_imag][nr_imag];
     std::string nume;
 	std::string orar[3];
     std::string locatie;
