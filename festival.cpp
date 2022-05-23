@@ -104,7 +104,7 @@ void festival::read(){
     }
 
     while (fin >> nr_concert >> song_name)
-        if (nr_concert > p.size()){
+        if ((unsigned long) nr_concert > p.size()){
             throw eroare_nr_artist("indexul artistului nu exista!\n");
         } else {
             this->AddSong(nr_concert, song_name);
