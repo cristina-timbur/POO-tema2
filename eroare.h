@@ -14,5 +14,8 @@ class eroare_ora_concert : public eroare_aplicatie{
 public:
     explicit eroare_ora_concert(const std::string &arg) : eroare_aplicatie(arg){}
 };
-
+class eroare_nr_artist: public eroare_aplicatie{
+public:
+    explicit eroare_nr_artist(const std::string &arg) : eroare_aplicatie(arg){}
+};
 #endif //EROARE_H

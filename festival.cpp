@@ -1,5 +1,6 @@
 #include "festival.h"
 #include "concert_artist.h"
+#include "eroare.h"
 #include <fstream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
@@ -103,8 +104,11 @@ void festival::read(){
     }
 
     while (fin >> nr_concert >> song_name)
-        this->AddSong(nr_concert, song_name);
-
+        if (nr_concert > p.size()){
+            throw eroare_nr_artist("indexul artistului nu exista!\n");
+        } else {
+            this->AddSong(nr_concert, song_name);
+        }
 }
 //-----------------------------------------------------------------
 void festival::AddSong(int nr_artist, const std::string &name){
@@ -117,7 +121,6 @@ void festival::AddSong(int nr_artist, const std::string &name){
     }
 
 }
-
 
 void festival::draw(){
     int first = 0, nr = 0, maxt = 0;

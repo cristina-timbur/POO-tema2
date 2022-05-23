@@ -12,25 +12,26 @@ void postp(int nr){
 }
 
 int main(){
-    user u;
-	auto f = festival::get_festival();
-    std::ifstream fin("festival.txt");
 
     try {
+        user u;
+        auto f = festival::get_festival();
+        std::ifstream fin("festival.txt");
         concert_artist c("avicii", 18, true);
         c.setPret(175);
         fin >> *f;
         f->read();
         postp(1);
         f->restart_f(1);
+        f->AddSong(2, "lights out!");
+        std::cin >> u;
+        u.Quest();
+        f->draw();
+        festival::QuestA();
     }
     catch (const std::invalid_argument &err){
         std::cout << err.what();
     }
-    f->AddSong(2, "lights out!");
-    std::cin >> u;
-    u.Quest();
-    f->draw();
-    festival::QuestA();
+
     return 0;
 }
