@@ -16,6 +16,7 @@ int main(){
         user<int> u;
         user<double> u1;
         std::cin >> u1;
+        u1.calcDurata();
         auto f = festival::get_festival();
         std::ifstream fin("festival.txt");
         concert_artist c("alic", 24, "noname", false, 16, true);
@@ -26,6 +27,7 @@ int main(){
         f->restart_f(1);
         f->AddSong(2, "lights out!");
         std::cin >> u;
+        u.calcDurata();
         u.Quest();
         f->draw();
         festival::QuestA();
