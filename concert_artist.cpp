@@ -2,12 +2,13 @@
 #include "eroare.h"
 #include <algorithm>
 
-concert_artist::concert_artist(const std::string &artist, double ora, bool acces_culise) : concert(){
+concert_artist::concert_artist(const std::string& nume, int varsta, const std::string &album, bool trupa, double ora, bool acces_culise) : concert(){
     if (ora > 24)
         throw eroare_ora_concert("Constructor invalid. Ora invalida\n");
     else this->ora = ora;
     this->acces_culise = acces_culise;
-    this->artist = artist;
+    artist_builder ab;
+    this->artist_ = ab.varsta(varsta).nume(nume).album(album).trupa(trupa).build();
 }
 
 void concert_artist::Postpone(){
@@ -20,7 +21,7 @@ void concert_artist::Postpone(){
 }
 
 std::ostream &operator<< (std::ostream &os, const concert_artist &c){
-    os << "Concert: " << c.artist << ". \nAcces culise: " << c.acces_culise << "\n";
+    os << "Concert: " << c.artist_ << ". \nAcces culise: " << c.acces_culise << "\n";
     os << "Pret: " << c.pret << "\n";
     os << "Ora: " << c.ora << "\n";
     os << "Zona: " << c.zona << "\n";
@@ -33,7 +34,7 @@ std::ostream &operator<< (std::ostream &os, const concert_artist &c){
 }
 
 std::istream &operator>> (std::istream &in, concert_artist &c) {
-	in >> c.artist >> c.zona >> c.acces_culise >> c.ora;
+	in >> c.artist_ >> c.zona >> c.acces_culise >> c.ora;
 	return in;
 }
 

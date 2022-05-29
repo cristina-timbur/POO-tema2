@@ -18,4 +18,8 @@ class eroare_nr_artist: public eroare_aplicatie{
 public:
     explicit eroare_nr_artist(const std::string &arg) : eroare_aplicatie(arg){}
 };
+class eroare_builder: public eroare_aplicatie{
+public:
+    explicit eroare_builder(const std::string &arg) : eroare_aplicatie(arg){}
+};
 #endif //EROARE_H

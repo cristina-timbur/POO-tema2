@@ -2,22 +2,22 @@
 #define CONCERT_ARTIST_H
 
 #include "concert.h"
+#include "artist.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
 
 class concert_artist : public concert{
-
     std::vector<std::shared_ptr<concert>> concerte;
-    std::string artist;
+    artist artist_;
     double ora{};
     std::vector <std::string> piese;
     bool acces_culise{};
 
 public:
     concert_artist();
-    concert_artist(const std::string &artist, double ora, bool acces_culise);
+    concert_artist(const std::string& nume, int varsta, const std::string &album, bool trupa, double ora, bool acces_culise);
 	~concert_artist() override = default;
     concert_artist(const concert_artist& c);
     concert_artist& operator=(concert_artist&&) = default;

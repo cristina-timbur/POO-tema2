@@ -12,12 +12,13 @@ void postp(int nr){
 }
 
 int main(){
-
     try {
-        user u;
+        user<int> u;
+        user<double> u1;
+        std::cin >> u1;
         auto f = festival::get_festival();
         std::ifstream fin("festival.txt");
-        concert_artist c("avicii", 18, true);
+        concert_artist c("alic", 24, "noname", false, 16, true);
         c.setPret(175);
         fin >> *f;
         f->read();

@@ -1,17 +1,23 @@
 #include "user.h"
 #include <fstream>
 
+template<typename T>
+user<T>::user(std::string lastname, std::string firstname, std::string email, int age, const T ora_inceput) :
+    lastname(std::move(lastname)), firstname(std::move(firstname)), email(std::move(email)), age(age), ora_inceput(ora_inceput){}
 
-
-user::user(std::string lastname, std::string firstname, std::string email, int age) :
-    lastname(std::move(lastname)), firstname(std::move(firstname)), email(std::move(email)), age(age){}
-
-std::ostream &operator<<(std::ostream &out, const user &u) {
+template<typename T>
+std::ostream &operator<<(std::ostream &out, const user<T> &u) {
 	out << "User: " << u.lastname << " " << u.firstname << ". Email: ." << u.email << "Age: "<< u.age << ".\n";
 	return out;
 }
 
-std::istream &operator>>(std::istream &in, user &u) {
+template<typename T>
+T user<T>::calcDurata() const{
+    return (T) (ora_final - ora_inceput);
+}
+
+template<typename T>
+std::istream &operator>>(std::istream &in, user<T> &u) {
 	std::string email;
     int age;
 	std::cout << "Please enter your first and last name: ";
@@ -22,7 +28,8 @@ std::istream &operator>>(std::istream &in, user &u) {
 		in >> email;
 			if (email.find('@') >= email.length())
 				std::cout <<"Invalid input! Please enter a real email.\n";
-			break;
+			else
+                break;
 	}
 	u.email = email;
 	std::cout << "Please enter your age: ";
@@ -30,14 +37,19 @@ std::istream &operator>>(std::istream &in, user &u) {
         in >> age;
             if (age <= 0 or age > 105)
                 std::cout << "Invalid age! \n";
-            break;
+            else
+                break;
     }
     u.age = age;
+    std::cout << "Please enter your preferred start hour: ";
+    in >> u.ora_inceput;
+    std::cout << "Please enter your preferred final hour: ";
+    in >> u.ora_final;
 	return in;
 }
 
-
-void user::Quest(){
+template<typename T>
+void user<T>::Quest(){
     std::string ans, name, fname;
     std::ofstream fout("quest.txt", std::ios::app);
 
@@ -58,7 +70,7 @@ void user::Quest(){
         std::cout << "Adult's lastname: ";
         std::cin >> name;
     }
-	fout << firstname + " " + lastname << " " << ans << " ";
+	fout << firstname + " " + lastname << " " << ans << " " << calcDurata() << " ";
     if (age < 16)
         fout << age << " " << name << " " << fname;
 
@@ -67,3 +79,17 @@ void user::Quest(){
     fout1.close();
     fout.close();
 }
+
+
+
+
+template class user<int>;
+template class user<double>;
+template
+std::ostream &operator<< <>(std::ostream &out, const user<int> &u);
+template
+std::ostream &operator<< <>(std::ostream &out, const user<double> &u);
+template
+std::istream &operator>> <>(std::istream &in, user<int> &u);
+template
+std::istream &operator>> <>(std::istream &in, user<double> &u);
