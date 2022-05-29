@@ -15,11 +15,11 @@ private:
 public:
     artist() = default;
     friend std::ostream &operator << (std::ostream &os, const artist& a){
-        std::cout << a.nume << " ";
+        os << a.nume << " ";
         return os;
     }
     friend std::istream &operator >> (std::istream &in, artist &a){
-        std::cin >> a.nume;
+        in >> a.nume;
         return in;
     }
 };

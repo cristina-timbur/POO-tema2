@@ -2,7 +2,7 @@
 #include <fstream>
 
 template<typename T>
-user<T>::user(const T ora_inceput, const T ora_final, std::string lastname, std::string firstname, std::string email="-", int age):
+user<T>::user(T ora_inceput, T ora_final, std::string lastname, std::string firstname, std::string email, int age):
     lastname(std::move(lastname)), firstname(std::move(firstname)), email(std::move(email)), age(age), ora_inceput(ora_inceput), ora_final(ora_final){}
 
 template<typename T>

@@ -18,7 +18,8 @@ class user {
     T ora_inceput;
     T ora_final;
 public:
-    user(const T ora_inceput, const T ora_final, std::string lastname="-", std::string firstname="-", std::string email="-", int age=18);
+//    user() = default;
+    explicit user(T ora_inceput=12, T ora_final=20, std::string lastname="-", std::string firstname="-", std::string email="-", int age=18);
     virtual ~user() = default;
     void Quest();
     T calcDurata() const;
